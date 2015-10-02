@@ -1,0 +1,99 @@
+Args = {...}
+dim = {}
+stat = "quarrying..."
+dir = "north"
+pos = {1, 1, 0}
+oth = 1
+perc = 0
+clear()
+print("Booting")
+sleep(.5)
+clear()
+print("Booting.")
+print("Refuelling...")
+dofile("/funcy")
+clear()
+print("Booting..")
+sleep(.2)
+print("Importing functions...")
+sleep(.5)
+clear()
+print("Booting...")
+sleep(.5)
+clear()
+if (Args[1] == nil) or (Args[2] == nil) or (Args[3] == nil) then 
+	clear()
+	term.setTextColor(colors.green)
+	print("[KEMQuar] v - 3.0")
+	print("")
+	term.setTextColor(colors.yellow)
+	term.write("Width : ")
+	term.setTextColor(colors.blue)
+	dim[1] = io.read() + 0
+	clear()
+	term.setTextColor(colors.green)
+	print("[KEMQuar] v - 3.0")
+	print("")
+	term.setTextColor(colors.white)
+	term.write("Length : ")
+	term.setTextColor(colors.yellow)
+	dim[2] = io.read() + 0
+	clear()
+	term.setTextColor(colors.green)
+	print("[KEMQuar] v - 3.0")
+	print("")
+	term.setTextColor(colors.white)
+	term.write("Depth : ")
+	term.setTextColor(colors.yellow)
+	dim[3] = io.read() + 0
+else
+	dim[1] = Args[1] + 0
+	dim[2] = Args[2] + 0
+	dim[3] = Args[3] + 0
+end
+perct = (dim[1] * dim[2] * dim[3])
+clear()
+logo(stat,pos)
+down()
+logo(stat,pos)
+for z = 1 , dim[3] do
+	for y = 1 , dim[2] do
+		if dim[1] ~= 1 then
+			for x = 1 , dim[1] - 1 do
+		  frwd()	
+		  logo(stat,pos)
+   end
+		end
+		if (y == dim[2]) or (dim[2] == 1) then
+			lft()
+			lft()
+		else
+			if oth == 1 then
+				rgt()
+				frwd()
+				logo(stat,pos)
+				rgt()
+				oth = 0
+				inv()
+			elseif oth == 0 then
+				lft()
+				frwd()
+				logo(stat,pos)
+				lft()
+				oth = 1
+				inv()
+			end
+		end
+	end
+	if (z ~= dim[3]) and (dim[3] ~= 1) then
+		down()
+		logo(stat,pos)
+	end
+end
+quit()
+stat = "finished"
+logo(stat,pos)
+term.setTextColor(colors.white)
+print("Press any key to continue...")
+x = os.pullEvent()
+clear()
